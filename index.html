@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HighMinds - Comunidade de Inteligências Elevadas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d4ff;
+            --secondary: #ff0055;
+            --accent: #ffd700;
+            --dark: #0a0e27;
+            --darker: #050811;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1), transparent),
+                        radial-gradient(circle at 80% 80%, rgba(255, 0, 85, 0.1), transparent),
+                        linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb1 { width: 400px; height: 400px; top: -100px; right: -100px; background: var(--primary); animation-delay: 0s; }
+        .orb2 { width: 300px; height: 300px; bottom: -50px; left: -50px; background: var(--secondary); animation-delay: 5s; }
+        .orb3 { width: 250px; height: 250px; top: 50%; left: 50%; background: var(--accent); animation-delay: 10s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 20px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+            letter-spacing: -2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #aaa;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), #00a8cc);
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: #000;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            transition: 0.3s;
+        }
+
+        .glass-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .contact-card {
+            padding: 30px;
+        }
+
+        .contact-card h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .contact-card a, .contact-card p {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: var(--secondary);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .pricing-card {
+            padding: 40px;
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 20px 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-features {
+            text-align: left;
+            margin: 30px 0;
+            color: #ccc;
+        }
+
+        .pricing-features li {
+            list-style: none;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .pricing-features li:before {
+            content: "✓ ";
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; }
+            .nav-links { gap: 15px; font-size: 0.9rem; }
+            .cta-buttons { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-brain"></i> HighMinds
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">Sobre</a></li>
+                <li><a href="#contact">Contato</a></li>
+                <li><a href="#pricing">Grupos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">HighMinds</h1>
+            <p class="hero-subtitle">Comunidade para Mentes Brilhantes com Pouco Tempo</p>
+            <p style="color: #aaa; margin-bottom: 40px; font-size: 1.1rem;">Conecte-se com pessoas inteligentes, ambiciosas e que querem elevar seu nível. Sem desperdício de tempo. Puro valor.</p>
+            
+            <div class="cta-buttons">
+                <a href="https://chat.whatsapp.com/Je8DtICCRBHIe4D5sMKMp5?s=cl&p=a&ilr=2" class="btn btn-primary">
+                    <i class="fab fa-whatsapp"></i> Entrar no Grupo Geral
+                </a>
+                <a href="https://chat.whatsapp.com/LSzl3TOl31TEQqV95UGZ8U?s=cl&p=a&ilr=2" class="btn btn-primary">
+                    <i class="fab fa-whatsapp"></i> Grupo de Alunos Privados
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Por Que HighMinds?</h2>
+            <div class="features-grid">
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Crescimento Acelerado</h3>
+                    <p>Rodeie-se de pessoas que pensam grande e agem rápido. Seu círculo determina seu futuro.</p>
+                </div>
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Inteligência Coletiva</h3>
+                    <p>Acesso a mentes brilhantes em tecnologia, negócios, IA e empreendedorismo. Conhecimento compartilhado.</p>
+                </div>
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                    <h3>Sem Perda de Tempo</h3>
+                    <p>Conversas diretas, sem filler. Apenas conteúdo de valor para quem tem agenda apertada.</p>
+                </div>
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>Networking Premium</h3>
+                    <p>Conecte-se com desenvolvedores, empreendedores e especialistas em IA que estão construindo o futuro.</p>
+                </div>
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Mentorias & Cursos</h3>
+                    <p>Acesso a conhecimento prático de quem já fez. Aprenda com quem está na linha de frente.</p>
+                </div>
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i class="fas fa-star"></i></div>
+                    <h3>Comunidade Exclusiva</h3>
+                    <p>Ambiente curado para mentes elevadas. Qualidade sobre quantidade. Sempre.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Groups Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Escolha Seu Caminho</h2>
+            <div class="pricing-grid">
+                <div class="glass-card pricing-card">
+                    <h3>🌍 Grupo Geral</h3>
+                    <p style="color: #aaa; margin: 15px 0;">Para quem quer conhecer a comunidade</p>
+                    <div class="price">GRÁTIS</div>
+                    <ul class="pricing-features">
+                        <li>Acesso à comunidade HighMinds</li>
+                        <li>Networking com mentes brilhantes</li>
+                        <li>Discussões e trocas de ideias</li>
+                        <li>Conteúdo compartilhado</li>
+                        <li>Eventos e lives ocasionais</li>
+                    </ul>
+                    <a href="https://chat.whatsapp.com/Je8DtICCRBHIe4D5sMKMp5?s=cl&p=a&ilr=2" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fab fa-whatsapp"></i> Entrar Agora
+                    </a>
+                </div>
+
+                <div class="glass-card pricing-card featured">
+                    <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(to right, var(--primary), var(--secondary)); padding: 5px 20px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">RECOMENDADO</div>
+                    <h3>👑 Alunos Privados</h3>
+                    <p style="color: #aaa; margin: 15px 0;">Para quem quer elevar ao máximo</p>
+                    <div class="price">Premium</div>
+                    <ul class="pricing-features">
+                        <li>Tudo do Grupo Geral</li>
+                        <li>Mentorias 1-on-1 com Raul</li>
+                        <li>Cursos exclusivos de IA & Dev</li>
+                        <li>Acesso a projetos premium</li>
+                        <li>Suporte prioritário</li>
+                        <li>Comunidade VIP curada</li>
+                    </ul>
+                    <a href="https://chat.whatsapp.com/LSzl3TOl31TEQqV95UGZ8U?s=cl&p=a&ilr=2" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fab fa-whatsapp"></i> Entrar Grupo Premium
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <p style="color: #aaa; font-size: 1.1rem; margin-bottom: 40px;">Tem dúvidas? Quer saber mais? Fale comigo!</p>
+            
+            <div class="contact-info">
+                <div class="glass-card contact-card">
+                    <h4><i class="fab fa-whatsapp"></i> WhatsApp</h4>
+                    <a href="https://wa.me/5579999638768">+55 79 99963-8768</a>
+                </div>
+                <div class="glass-card contact-card">
+                    <h4><i class="fas fa-envelope"></i> Email</h4>
+                    <a href="mailto:raulrobertosd10@gmail.com">raulrobertosd10@gmail.com</a>
+                </div>
+                <div class="glass-card contact-card">
+                    <h4><i class="fab fa-github"></i> GitHub</h4>
+                    <a href="https://github.com/OffModzKkkkj">OffModzKkkkj</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 HighMinds. Comunidade de Mentes Elevadas.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Criado por <strong>Raul Roberto</strong> | Powered by Intelligence</p>
+        </div>
+    </footer>
+</body>
+</html>
