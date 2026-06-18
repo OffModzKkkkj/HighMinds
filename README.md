@@ -1,1 +1,1 @@
-# HighMinds
+# HighMinds - Comunidade de Mentes Elevadas
